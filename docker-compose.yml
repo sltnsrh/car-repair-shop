@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: my_user
+      POSTGRES_PASSWORD: my_password
+      POSTGRES_DB: keycloakDb
+    volumes:
+      - key-cloak_keycloak_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - repair-shop_network
+
+  kc:
+    image: quay.io/keycloak/keycloak:21.0.1
+    container_name: keycloak
+    command:
+      - start-dev
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_SCHEMA: public
+      KC_DB_URL_DATABASE: keycloakDb
+      KC_DB_USERNAME: my_user
+      KC_DB_PASSWORD: my_password
+      KEYCLOAK_HOSTNAME: localhost
+      KEYCLOAK_ADMIN: kc_admin
+      KEYCLOAK_ADMIN_PASSWORD: kc_password
+    ports:
+      - "8083:8080"
+    volumes:
+      - key-cloak_keycloak_data:/var/lib/postgresql/data
+    depends_on:
+      - db
+    networks:
+      - repair-shop_network
+
+  eureka-server:
+    image: srhsltn/eureka-server
+    build: ./
+    container_name: eureka-server
+    environment:
+      eureka.instance.hostname: eureka-server
+      eureka.client.register-with-eureka: false
+      eureka.client.fetch-registry: false
+    ports:
+      - "8761:8761"
+    networks:
+      - repair-shop_network
+
+  api-gateway:
+    image: srhsltn/api-gateway
+    build: ./
+    container_name: api-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      eureka.client.service-url.defaultZone: http://eureka-server:8761/eureka/
+    depends_on:
+      - kc
+    networks:
+      - repair-shop_network
+
+networks:
+  repair-shop_network:
+    driver: bridge
+
+volumes:
+  key-cloak_keycloak_data:
+    external: true
