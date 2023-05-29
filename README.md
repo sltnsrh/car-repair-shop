@@ -8,14 +8,14 @@ The app has possible roles: customer, manager, mechanic, and admin.
 The entire activity of auto service encapsulates in one application.</br>
 </br>
 ### Consist of elements and microservices: 
- - Eureka Server
- - Api-Gateway
+ - [Eureka Server](https://github.com/sltnsrh/car-repair-eureka-server)
+ - [Api-Gateway](https://github.com/sltnsrh/car-repair-api-gateway)
  - Keycloak Auth Server
- - Account-Service
- - Car-Service
- - Order-Service
- - Mechanic-Service
+ - [Account-Service](https://github.com/sltnsrh/car-repair-account-service)
+ - [Car-Service](https://github.com/sltnsrh/car-repair-car-service)
+ - [Order-Service](https://github.com/sltnsrh/car-repair-order-service)
+ - [Mechanic-Service](https://github.com/sltnsrh/car-repair-mechanic-service)
  </br>
-### Used databases:
+### Used databases: 
  - Postgresql for Keycloak
  - MongoDb for Car-Service
