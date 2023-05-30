@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "72b0385e-76c4-4843-b082-94e5deb70d65",
+		"name": "Car Repair Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22714477"
+	},
+	"item": [
+		{
+			"name": "registration user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"someone@email.com\",\n    \"firstName\": \"Bobby\",\n    \"lastName\": \"Voles\",\n    \"password\": \"p@ssW0rd\",\n    \"repeatPassword\": \"p@ssW0rd\",\n    \"phoneNumber\": \"+380983332217\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/users/5c7254fb-5260-4104-8668-78ba9e8b7c35",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"users",
+						"5c7254fb-5260-4104-8668-78ba9e8b7c35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Jwt Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    pm.environment.set(\"auth.token\", pm.response.json().access_token);",
+							"    pm.environment.set(\"refresh.token\", pm.response.json().refresh_token);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "some@email.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "p@ssW0rd",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "api-client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "kfECkllyhRk4LZpxJYB56ibT54PajiFu",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8083/realms/car-repair-realm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"realms",
+						"car-repair-realm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\":\"BMW\",\n    \"model\":\"340i\",\n    \"licencePlate\":\"AA1234AA\",\n    \"productionYear\":\"2020\",\n    \"vin\":\"WBA123456789BB\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all cars with pageable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "sortByField",
+							"value": "licencePlate",
+							"disabled": true
+						},
+						{
+							"key": "direction",
+							"value": "desc",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update a car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// var csrf = postman.getResponseCookie(\"XSRF-TOKEN\");",
+							"// postman.setEnvironmentVariable(\"xsrf-token\",  csrf.value);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\":\"BMW\",\n    \"model\":\"320d\",\n    \"licencePlate\":\"AA1299AA\",\n    \"productionYear\":\"2023\",\n    \"vin\":\"WBA123456789246BB\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/cars/646f68adcb53a3295bd16490",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"646f68adcb53a3295bd16490"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/646f69225a0685240977a522",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"646f69225a0685240977a522"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all my cars",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/my-list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"my-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all cars by owner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/by-owner/9d795b95-a274-4c45-b15b-7498f6c5dc39",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"by-owner",
+						"9d795b95-a274-4c45-b15b-7498f6c5dc39"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth.token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
