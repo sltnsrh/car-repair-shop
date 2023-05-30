@@ -71,4 +71,4 @@ networks:
 
 volumes:
   key-cloak_keycloak_data:
-    external: true
+    external: false
