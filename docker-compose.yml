@@ -53,8 +53,8 @@ services:
       - repair-shop_network
 
   api-gateway:
+    build: ../api-gateway
     image: srhsltn/api-gateway
-    build: ./
     container_name: api-gateway
     ports:
       - "8000:8000"
