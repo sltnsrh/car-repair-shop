@@ -7,6 +7,7 @@ make requests for service, count jobs and parts used for repairing, pay for the 
 The app has possible roles: customer, manager, mechanic, and admin.
 The entire activity of auto service encapsulates in one application.</br>
 </br>
+
 ### Consist of elements and microservices: 
  - [Eureka Server](https://github.com/sltnsrh/car-repair-eureka-server)
  - [Api-Gateway](https://github.com/sltnsrh/car-repair-api-gateway)
@@ -16,6 +17,7 @@ The entire activity of auto service encapsulates in one application.</br>
  - [Order-Service](https://github.com/sltnsrh/car-repair-order-service)
  - [Mechanic-Service](https://github.com/sltnsrh/car-repair-mechanic-service)
 </br>
+
 ### Used databases: 
  - Postgresql for Keycloak
  - MongoDb for Car-Service
@@ -23,4 +25,5 @@ The entire activity of auto service encapsulates in one application.</br>
 
 </br>
 Approximate scheme of services architecture. Relations can be differ.</br>
-[car-repair-shop-scheme.pdf] (car-repair-shop-scheme.pdf)
+
+[car-repair-shop-scheme](car-repair-shop-scheme.pdf)
