@@ -24,4 +24,6 @@ The entire activity of auto service encapsulates in one application.</br>
  - MongoDb for Order-Service
 
 </br>
-Approximate scheme of services architecture. Relations can be differ. [car-repair-shop-scheme.pdf](car-repair-shop-scheme.pdf)
+Approximate scheme of services architecture. Relations can be differ. 
+
+[car-repair-shop-scheme.pdf](https://github.com/sltnsrh/car-repair-shop/blob/master/car-repair-shop-scheme.pdf)
