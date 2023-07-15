@@ -16,12 +16,15 @@ The entire activity of auto service encapsulates in one application.</br>
  - [Car-Service](https://github.com/sltnsrh/car-repair-car-service)
  - [Order-Service](https://github.com/sltnsrh/car-repair-order-service)
  - [Mechanic-Service](https://github.com/sltnsrh/car-repair-mechanic-service)
+ - Message-Service
+ - Resource-service
 </br>
 
 ### Used databases: 
  - Postgresql for Keycloak
  - MongoDb for Car-Service
  - MongoDb for Order-Service
+ - MongoDb for Resourse-Service
 
 </br>
 Approximate scheme of services architecture. Relations can be differ. 
