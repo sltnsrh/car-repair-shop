@@ -20,3 +20,7 @@ The entire activity of auto service encapsulates in one application.</br>
  - Postgresql for Keycloak
  - MongoDb for Car-Service
  - MongoDb for Order-Service
+
+Approximate scheme of services architecture. Relations can be differ.
+
+[arch](car-repair-shop-scheme.pdf)
