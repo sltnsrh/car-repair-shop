@@ -15,7 +15,6 @@ The entire activity of auto service encapsulates in one application.</br>
  - [Account-Service](https://github.com/sltnsrh/car-repair-account-service)
  - [Car-Service](https://github.com/sltnsrh/car-repair-car-service)
  - [Order-Service](https://github.com/sltnsrh/car-repair-order-service)
- - [Mechanic-Service](https://github.com/sltnsrh/car-repair-mechanic-service)
  - [Message-Service](https://github.com/sltnsrh/car-repair-message-service)
  - Resource-service
 </br>
