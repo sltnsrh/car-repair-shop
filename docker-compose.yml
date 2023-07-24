@@ -140,6 +140,33 @@ services:
     volumes:
       - kafka-vol:/kafka/data
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.4
+    container_name: kibana
+    depends_on:
+      - elastic
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://resource-service-elasticsearch:9200
+      ELASTICSEARCH_HOSTS: '["http://resource-service-elasticsearch:9200"]'
+    networks:
+      - repair-shop_network
+
+
+  elastic:
+    image:  docker.elastic.co/elasticsearch/elasticsearch:7.17.4
+    container_name: resource-service-elasticsearch
+    restart: always
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+    networks:
+      - repair-shop_network
+    volumes:
+      - databases:/elastic/data
+
 networks:
   zookeeper-network:
   repair-shop_network:
